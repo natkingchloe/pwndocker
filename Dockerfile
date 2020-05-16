@@ -67,6 +67,9 @@ RUN git clone --depth 1 https://github.com/scwuaptx/Pwngdb.git /root/Pwngdb && \
 RUN git clone --depth 1 https://github.com/niklasb/libc-database.git libc-database && \
     cd libc-database && ./get || echo "/libc-database/" > ~/.libcdb_path
 
+RUN cd && git clone https://github.com/gpakosz/.tmux.git && \
+    ln -s -f .tmux/.tmux.conf && cp .tmux/.tmux.conf.local .
+
 WORKDIR /ctf/work/
 
 COPY --from=skysider/glibc_builder64:2.19 /glibc/2.19/64 /glibc/2.19/64
