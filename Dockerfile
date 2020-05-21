@@ -70,6 +70,9 @@ RUN git clone --depth 1 https://github.com/niklasb/libc-database.git libc-databa
 RUN cd && git clone https://github.com/gpakosz/.tmux.git && \
     ln -s -f .tmux/.tmux.conf && cp .tmux/.tmux.conf.local .
 
+RUN cd && git clone https://github.com/ryfch/dotfiles.git && \
+    cd dotfiles && chmod +x bootstrap.sh && ./bootstrap.sh
+
 WORKDIR /ctf/work/
 
 COPY --from=skysider/glibc_builder64:2.19 /glibc/2.19/64 /glibc/2.19/64
