@@ -74,6 +74,11 @@ RUN cd && git clone https://github.com/gpakosz/.tmux.git && \
 RUN cd && git clone https://github.com/ryfch/dotfiles.git && \
     cd dotfiles && chmod +x bootstrap.sh && ./bootstrap.sh
 
+RUN curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+RUN vim +PlugInstall +qall
+
 WORKDIR /ctf/work/
 
 #COPY --from=skysider/glibc_builder64:2.19 /glibc/2.19/64 /glibc/2.19/64
