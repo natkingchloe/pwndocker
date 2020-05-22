@@ -37,6 +37,7 @@ RUN dpkg --add-architecture i386 && \
     patchelf \
     gawk \
     file \
+    rsync \
     python3-distutils \
     bison --fix-missing && \
     rm -rf /var/lib/apt/list/*
@@ -75,26 +76,26 @@ RUN cd && git clone https://github.com/ryfch/dotfiles.git && \
 
 WORKDIR /ctf/work/
 
-COPY --from=skysider/glibc_builder64:2.19 /glibc/2.19/64 /glibc/2.19/64
-COPY --from=skysider/glibc_builder32:2.19 /glibc/2.19/32 /glibc/2.19/32
-
-COPY --from=skysider/glibc_builder64:2.23 /glibc/2.23/64 /glibc/2.23/64
-COPY --from=skysider/glibc_builder32:2.23 /glibc/2.23/32 /glibc/2.23/32
-
-COPY --from=skysider/glibc_builder64:2.24 /glibc/2.24/64 /glibc/2.24/64
-COPY --from=skysider/glibc_builder32:2.24 /glibc/2.24/32 /glibc/2.24/32
-
-COPY --from=skysider/glibc_builder64:2.28 /glibc/2.28/64 /glibc/2.28/64
-COPY --from=skysider/glibc_builder32:2.28 /glibc/2.28/32 /glibc/2.28/32
-
-COPY --from=skysider/glibc_builder64:2.29 /glibc/2.29/64 /glibc/2.29/64
-COPY --from=skysider/glibc_builder32:2.29 /glibc/2.29/32 /glibc/2.29/32
-
-COPY --from=skysider/glibc_builder64:2.30 /glibc/2.30/64 /glibc/2.30/64
-COPY --from=skysider/glibc_builder32:2.30 /glibc/2.30/32 /glibc/2.30/32
-
-COPY --from=skysider/glibc_builder64:2.31 /glibc/2.31/64 /glibc/2.31/64
-COPY --from=skysider/glibc_builder32:2.31 /glibc/2.31/32 /glibc/2.31/32
+#COPY --from=skysider/glibc_builder64:2.19 /glibc/2.19/64 /glibc/2.19/64
+#COPY --from=skysider/glibc_builder32:2.19 /glibc/2.19/32 /glibc/2.19/32
+#
+#COPY --from=skysider/glibc_builder64:2.23 /glibc/2.23/64 /glibc/2.23/64
+#COPY --from=skysider/glibc_builder32:2.23 /glibc/2.23/32 /glibc/2.23/32
+#
+#COPY --from=skysider/glibc_builder64:2.24 /glibc/2.24/64 /glibc/2.24/64
+#COPY --from=skysider/glibc_builder32:2.24 /glibc/2.24/32 /glibc/2.24/32
+#
+#COPY --from=skysider/glibc_builder64:2.28 /glibc/2.28/64 /glibc/2.28/64
+#COPY --from=skysider/glibc_builder32:2.28 /glibc/2.28/32 /glibc/2.28/32
+#
+#COPY --from=skysider/glibc_builder64:2.29 /glibc/2.29/64 /glibc/2.29/64
+#COPY --from=skysider/glibc_builder32:2.29 /glibc/2.29/32 /glibc/2.29/32
+#
+#COPY --from=skysider/glibc_builder64:2.30 /glibc/2.30/64 /glibc/2.30/64
+#COPY --from=skysider/glibc_builder32:2.30 /glibc/2.30/32 /glibc/2.30/32
+#
+#COPY --from=skysider/glibc_builder64:2.31 /glibc/2.31/64 /glibc/2.31/64
+#COPY --from=skysider/glibc_builder32:2.31 /glibc/2.31/32 /glibc/2.31/32
 
 COPY linux_server linux_server64  /ctf/
 
